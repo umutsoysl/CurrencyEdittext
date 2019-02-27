@@ -74,6 +74,22 @@ class CurrencyTextWatcher implements TextWatcher
                 return;
             }
 
+            if(editText.getSelectionStart()-1>=0) {
+                String word = newText.substring(editText.getSelectionStart()-1,editText.getSelectionStart());
+                if(word.contentEquals(".") || word.contentEquals(",")){
+                    okcommo = true;
+                    clickDot = true;
+                }else{
+                    okcommo = false;
+                    clickDot = false;
+                }
+            }else{
+                okcommo = false;
+                clickDot = false;
+            }
+
+
+
             newText = (editText.areNegativeValuesAllowed()) ? newText.replaceAll("[^0-9/-]", "") : newText.replaceAll("[^0-9]", "");
             if (!newText.equals("") && !newText.equals("-"))
             {
@@ -103,7 +119,7 @@ class CurrencyTextWatcher implements TextWatcher
                 cursorPosition = (editText.length() - 4);
                 isEmpty = false;
             }
-       /*     else if (okcommo)
+            else if (okcommo)
             {
                 if (cursorPosition!=lastGoodInput.length())
                 {
@@ -121,7 +137,7 @@ class CurrencyTextWatcher implements TextWatcher
                 {
                     editText.setSelection(textToDisplay.length() - 1);
                 }
-            }*/
+            }
             else
             {
                 okcommo = false;
@@ -144,7 +160,13 @@ class CurrencyTextWatcher implements TextWatcher
                 }
                 else
                 {
+                    if((cursorPosition + Math.abs(currentTextsize - lastGoodInput.length()))>lastGoodInput.length()){
+                        editText.setSelection(editText.getSelectionStart()+1);
+                     }else{
+
                     editText.setSelection(cursorPosition + Math.abs(currentTextsize - lastGoodInput.length()));
+                    }
+
                 }
             }
         }
@@ -192,11 +214,7 @@ class CurrencyTextWatcher implements TextWatcher
 
     @Override
     public void onTextChanged(final CharSequence s, int start, int before, int count)
-    {
-
-
-
-    }
+    { }
 
 
     private void changeDecimalKeyboard()
@@ -206,7 +224,7 @@ class CurrencyTextWatcher implements TextWatcher
 
     private void changeSignedKeyboard()
     {
-        editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_CLASS_PHONE);
+        editText.setRawInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
 
