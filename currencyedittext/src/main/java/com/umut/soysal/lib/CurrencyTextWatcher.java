@@ -18,7 +18,9 @@ class CurrencyTextWatcher implements TextWatcher
     protected static boolean clickDot = false;
     protected static boolean isEmpty = false;
     protected static boolean clickDelete = false;
+    protected static boolean rightPost = false;
     public static int currentTextsize;
+
 
     CurrencyTextWatcher(CurrencyEditText textBox)
     {
@@ -65,7 +67,6 @@ class CurrencyTextWatcher implements TextWatcher
             //Start by converting the editable to something easier to work with, then remove all non-digit characters
             String newText = editable.toString();
             String textToDisplay;
-
             if (newText.length() < 1)
             {
                 lastGoodInput = "";
@@ -88,14 +89,22 @@ class CurrencyTextWatcher implements TextWatcher
                 clickDot = false;
             }
 
-
-
             newText = (editText.areNegativeValuesAllowed()) ? newText.replaceAll("[^0-9/-]", "") : newText.replaceAll("[^0-9]", "");
             if (!newText.equals("") && !newText.equals("-"))
             {
                 //Store a copy of the raw input to be retrieved later by getRawValue
                 editText.setRawValue(Long.valueOf(newText));
             }
+
+            //ondalik bolumdesin
+            if(!okcommo &&(editable.toString().length()-3)<=editText.getSelectionStart()){
+                newText = newText.substring(0,newText.length()-1);
+                rightPost = true;
+            }else{
+                rightPost = false;
+            }
+
+
             try
             {
                 textToDisplay = CurrencyTextFormatter.formatText(newText, editText.getLocale(), editText.getDefaultLocale(), editText.getDecimalDigits());
@@ -113,60 +122,62 @@ class CurrencyTextWatcher implements TextWatcher
             //Store the last known good input so if there are any issues with new input later, we can fall back gracefully.
             lastGoodInput = textToDisplay;
 
-            if (isEmpty)
-            {
-                editText.setSelection(editText.length() - 4);
-                cursorPosition = (editText.length() - 4);
-                isEmpty = false;
+            if(!clickDelete && rightPost && cursorPosition<=(editable.toString().length()-2)){
+                if(cursorPosition+2<=lastGoodInput.length()) {
+                    editText.setSelection(cursorPosition + 1);
+                }else{
+                    editText.setSelection(lastGoodInput.length()-1);
+                }
+                rightPost = false;
+            }else if(!clickDelete &&  rightPost && cursorPosition==(editable.toString().length()-1)){
+                editText.setSelection(lastGoodInput.length()-1);
+                rightPost = false;
             }
-            else if (okcommo)
-            {
-                if (cursorPosition!=lastGoodInput.length())
-                {
-                    if (clickDot)
-                    {
-                        editText.setSelection(editText.length() - 3);
-                        clickDot = false;
+            else {
+                if (isEmpty) {
+                    editText.setSelection(editText.length() - 4);
+                    cursorPosition = (editText.length() - 4);
+                    isEmpty = false;
+                } else if (okcommo) {
+                    if (cursorPosition != lastGoodInput.length()) {
+                        if (clickDot) {
+                            editText.setSelection(editText.length() - 3);
+                            clickDot = false;
+                        } else {
+                            editText.setSelection(cursorPosition + 1);
+                        }
+                    } else {
+                        editText.setSelection(textToDisplay.length() - 1);
                     }
-                    else
-                    {
-                        editText.setSelection(cursorPosition + 1);
+                } else {
+                    okcommo = false;
+                    int diff = Math.abs(currentTextsize - lastGoodInput.length());
+                    if (clickDelete&&!rightPost) {
+                        if (diff == 2) {
+                            editText.setSelection(cursorPosition - 1);
+                        } else if (diff > 2) {
+                            editText.setSelection(0);
+                        } else {
+                            editText.setSelection(cursorPosition);
+                        }
+                        clickDelete = false;
+                    }else if(clickDelete&&rightPost){
+                        if(cursorPosition+1<=lastGoodInput.length()) {
+                            editText.setSelection(cursorPosition - 1);
+                        }else{
+                            editText.setSelection(lastGoodInput.length()-4);
+                        }
+                        clickDelete = false;
                     }
-                }
-                else
-                {
-                    editText.setSelection(textToDisplay.length() - 1);
-                }
-            }
-            else
-            {
-                okcommo = false;
-                int diff = Math.abs(currentTextsize - lastGoodInput.length());
-                if (clickDelete)
-                {
-                    if (diff == 2)
-                    {
-                        editText.setSelection(cursorPosition - 1);
-                    }
-                    else if (diff > 2)
-                    {
-                        editText.setSelection(0);
-                    }
-                    else
-                    {
-                        editText.setSelection(cursorPosition);
-                    }
-                    clickDelete = false;
-                }
-                else
-                {
-                    if((cursorPosition + Math.abs(currentTextsize - lastGoodInput.length()))>lastGoodInput.length()){
-                        editText.setSelection(editText.getSelectionStart()+1);
-                     }else{
+                        else {
+                        if((cursorPosition + Math.abs(currentTextsize - lastGoodInput.length()))>lastGoodInput.length()){
+                            editText.setSelection(editText.getSelectionStart()+1);
+                        }else{
 
-                    editText.setSelection(cursorPosition + Math.abs(currentTextsize - lastGoodInput.length()));
-                    }
+                            editText.setSelection(cursorPosition + Math.abs(currentTextsize - lastGoodInput.length()));
+                        }
 
+                    }
                 }
             }
         }
