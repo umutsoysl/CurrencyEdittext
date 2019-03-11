@@ -231,15 +231,15 @@ class CurrencyTextWatcher implements TextWatcher
             // deletecursorPosition=indexOfLastDigit(s.toString().substring(start,start+1));
             currentTextsize = s.toString().length();
             cursorPosition = start;
-            if(editText.getText().length()-4>cursorPosition&&editText.getText().length()-4>0){
+            if(editText.getText().length()-4>=cursorPosition&&editText.getText().length()-4>0){
                 okcommo=false;
             }else{
                 okcommo=true;
             }
-        }else if(start==0){
+        }else if(start==0&&!ignoreIteration){
             currentTextsize = s.toString().length();
             cursorPosition = editText.getSelectionStart();
-            if(editText.getText().length()-4>cursorPosition&&editText.getText().length()-4>0){
+            if(editText.getText().length()-4>=cursorPosition&&editText.getText().length()-4>0){
                 okcommo=false;
             }else{
                 okcommo=true;
