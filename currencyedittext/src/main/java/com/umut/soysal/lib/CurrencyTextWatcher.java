@@ -13,7 +13,6 @@ class CurrencyTextWatcher implements TextWatcher
     private boolean ignoreIteration;
     private String lastGoodInput;
     protected static int cursorPosition = 0;
-    protected static int deletecursorPosition = 0;
     protected static boolean okcommo = false;
     protected static boolean clickDot = false;
     protected static boolean isEmpty = false;
@@ -75,12 +74,12 @@ class CurrencyTextWatcher implements TextWatcher
                 return;
             }
 
-            if(clickDelete && okcommo &&(editable.toString().length()-3)<=editText.getSelectionStart()){
+            if(clickDelete && okcommo &&(editable.toString().length()-2)<=editText.getSelectionStart()){
                 rightPost = true;
                 if(editText.getSelectionStart()==editable.toString().length()-1){
                     newText = newText.substring(0,newText.length()-1) +"0"+newText.substring(newText.length()-1,newText.length());
-                }else if (editText.getSelectionStart()==editable.toString().length()-2){
-                    newText = newText.substring(0,newText.length()-3) +"0"+newText.substring(newText.length()-2,newText.length());
+                }else if (editText.getSelectionStart()==editable.toString().length()){
+                    newText = newText+ "0";
                 }
             }else{
                 rightPost = false;
@@ -108,7 +107,7 @@ class CurrencyTextWatcher implements TextWatcher
             }
 
             //ondalik bolumdesin
-            if(!clickDelete&&!okcommo &&(editable.toString().length()-3)<=editText.getSelectionStart()){
+            if(!clickDelete&&!okcommo &&(editable.toString().length()-2)<=editText.getSelectionStart()){
                 newText = newText.substring(0,newText.length()-1);
                 rightPost = true;
             }else{
@@ -120,8 +119,7 @@ class CurrencyTextWatcher implements TextWatcher
             {
                 textToDisplay = CurrencyTextFormatter.formatText(newText, editText.getLocale(), editText.getDefaultLocale(), editText.getDecimalDigits());
 
-                String icon = textToDisplay.substring(0, 1);
-                textToDisplay = textToDisplay.substring(1) + icon;
+                textToDisplay = textToDisplay.substring(1);
 
             }
             catch (IllegalArgumentException exception)
@@ -137,22 +135,22 @@ class CurrencyTextWatcher implements TextWatcher
                 if(cursorPosition+2<=lastGoodInput.length()) {
                     editText.setSelection(cursorPosition + 1);
                 }else{
-                    editText.setSelection(lastGoodInput.length()-1);
+                    editText.setSelection(lastGoodInput.length());
                 }
                 rightPost = false;
-            }else if(!clickDelete &&  rightPost && cursorPosition==(editable.toString().length()-1)){
-                editText.setSelection(lastGoodInput.length()-1);
+            }else if(!clickDelete &&  rightPost && cursorPosition==(editable.toString().length())){
+                editText.setSelection(lastGoodInput.length());
                 rightPost = false;
             }
             else {
                 if (isEmpty) {
-                    editText.setSelection(editText.length() - 4);
-                    cursorPosition = (editText.length() - 4);
+                    editText.setSelection(1);
+                    cursorPosition = (1);
                     isEmpty = false;
                 } else if (okcommo) {
                     if (cursorPosition != lastGoodInput.length()) {
                         if (clickDot) {
-                            editText.setSelection(editText.length() - 3);
+                            editText.setSelection(editText.length() - 2);
                             clickDot = false;
                         } else {
                             editText.setSelection(cursorPosition + 1);
@@ -176,7 +174,7 @@ class CurrencyTextWatcher implements TextWatcher
                         if(cursorPosition+1<=lastGoodInput.length()) {
                             editText.setSelection(cursorPosition - 1);
                         }else{
-                            editText.setSelection(lastGoodInput.length()-4);
+                            editText.setSelection(lastGoodInput.length()-3);
                         }
                         clickDelete = false;
                     }
@@ -200,9 +198,7 @@ class CurrencyTextWatcher implements TextWatcher
                 try
                 {
                     tempText = CurrencyTextFormatter.formatText("000", editText.getLocale(), editText.getDefaultLocale(), editText.getDecimalDigits());
-
-                    String icon = tempText.substring(0, 1);
-                    tempText = tempText.substring(1) + icon;
+                    tempText = tempText.substring(1);
 
                 }
                 catch (IllegalArgumentException exception)
@@ -231,7 +227,7 @@ class CurrencyTextWatcher implements TextWatcher
             // deletecursorPosition=indexOfLastDigit(s.toString().substring(start,start+1));
             currentTextsize = s.toString().length();
             cursorPosition = start;
-            if(editText.getText().length()-4>=cursorPosition&&editText.getText().length()-4>0){
+            if(editText.getText().length()-3>=cursorPosition&&editText.getText().length()-3>0){
                 okcommo=false;
             }else{
                 okcommo=true;
@@ -239,7 +235,7 @@ class CurrencyTextWatcher implements TextWatcher
         }else if(start==0&&!ignoreIteration){
             currentTextsize = s.toString().length();
             cursorPosition = editText.getSelectionStart();
-            if(editText.getText().length()-4>=cursorPosition&&editText.getText().length()-4>0){
+            if(editText.getText().length()-3>=cursorPosition&&editText.getText().length()-3>0){
                 okcommo=false;
             }else{
                 okcommo=true;

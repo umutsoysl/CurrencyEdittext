@@ -159,24 +159,6 @@ public class CurrencyEditText extends EditText
         return CurrencyTextFormatter.formatText(val, currencyLocale, defaultLocale, decimalDigits);
     }
 
-    //klavye degistirme
- /*   @Override
-    protected void onSelectionChanged(int selStart, int selEnd)
-    {
-        cursor=selStart;
-        int commo = this.getText().length() - 4;
-        if (commo > selStart && commo > 0)
-        {
-            this.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
-        }
-        else
-        {
-            changeSignedKeyboard();
-        }
-    }
-*/
-
-
     private void init()
     {
 
@@ -200,7 +182,7 @@ public class CurrencyEditText extends EditText
         this.setGravity(Gravity.RIGHT);
         this.setInputType(InputType.TYPE_CLASS_TEXT);
         InputFilter[] filters = new InputFilter[1];
-        filters[0] = new InputFilter.LengthFilter(26);
+        filters[0] = new InputFilter.LengthFilter(20);
         this.setFilters(filters);
 
         this.addTextChangedListener(new TextWatcher()
