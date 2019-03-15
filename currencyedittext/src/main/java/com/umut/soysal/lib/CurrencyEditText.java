@@ -22,7 +22,6 @@ import java.util.Locale;
 @SuppressWarnings("unused")
 public class CurrencyEditText extends EditText
 {
-
     private Locale currencyLocale;
 
     private Locale defaultLocale = Locale.US;
