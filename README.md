@@ -1,5 +1,5 @@
 # CurrencyEdittext
-CurrencyEditText is an extension of Android's EditText view object. It is a module designed to provide ease-of-use when using an EditText field for gathering currency information from a user.
+CurrencyEditText is an library of Android's EditText view object. It is a module designed to provide ease-of-use when using an EditText field for gathering currency information from a user.
 
 # Overview
 
