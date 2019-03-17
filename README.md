@@ -48,7 +48,9 @@ CurrencyEditText relies on a Locale object to properly format the given value. T
 Locale is the users default locale setting based upon their Android configuration settings. This value is editable by the user in Android settings, as well as via the CurrencyEditText API. 
 
 ```kotlin
-...set currency usd
+/*
+set currency usd
+*/
 currencyEn.locale = Locale.US
 	
 ```
