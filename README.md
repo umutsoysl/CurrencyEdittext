@@ -2,6 +2,10 @@
 CurrencyEditText is an extension of Android's EditText view object. It is a module designed to provide ease-of-use when using an EditText field for gathering currency information from a user.
 
 # Overview
+
+As a user enters additional values, they will appear starting with the right-most digit, pushing older digit entries left as they type.
+The cursor changes to decimal when the user presses the decimal button
+
 <img src="gif/appSs.gif" width="300" height="490"/>
 
 # Setup
