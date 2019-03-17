@@ -27,7 +27,7 @@ dependencies {
 ```
 # Using The Module
 
-* Using the module is not much different from using any other EditText view. Simply define the view in your XML layout:
+* **Using the module is not much different from using any other EditText view. Simply define the view in your XML layout:**
 
 ```xml
 
@@ -41,7 +41,7 @@ dependencies {
 You're done! The CurrencyEditText module handles all the string manipulation and input monitoring required to allow for a clean, easy-to-use currency entry system.
 
 
-* You can choose any locale.
+* **You can choose any locale.**
 
 CurrencyEditText relies on a Locale object to properly format the given value. There are two Locale variables that are exposed via getters and setters on a given CurrencyEditText object: locale and defaultLocale.
 
