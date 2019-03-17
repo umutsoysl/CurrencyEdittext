@@ -15,7 +15,7 @@ maven { url 'https://jitpack.io' }
 
 ```gradle
 dependencies {
-  implementation 'com.github.umutsoysl:CurrencyEdittext:1.0'
+  implementation 'com.github.umutsoysl:CurrencyEdittext:1.0.1'
 }
 ```
 
