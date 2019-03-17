@@ -10,19 +10,43 @@ Yakında sizlerleyiz....
 Add it as a dependency to your `build.gradle`
 
 ```gradle
+
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
 
 ```gradle
+
 dependencies {
-	        implementation 'com.github.umutsoysl:CurrencyEdittext:1.0.1'
+	     implementation 'com.github.umutsoysl:CurrencyEdittext:1.0.1'
 	}
+	
 ```
+* **Usage**  
+These lines formats simply your input for default locale.
+
+```xml
+
+ <com.umut.soysal.lib.CurrencyEditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints"/>
+
+```
+You can choose any locale.
+
+```kotlin
+
+currencyEn.locale = Locale.US
+	
+```
+
+  
 
 License
 --------
