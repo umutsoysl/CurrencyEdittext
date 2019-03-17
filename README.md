@@ -34,8 +34,9 @@ dependencies {
 ```xml
 
  <com.umut.soysal.lib.CurrencyEditText
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+	    android:id="@+id/currencyEn"		       
             tools:ignore="MissingConstraints"/>
 
 ```
