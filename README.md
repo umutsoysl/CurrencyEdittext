@@ -27,8 +27,9 @@ dependencies {
 	}
 	
 ```
-* **Usage**  
-These lines formats simply your input for default locale.
+# Usage
+
+* These lines formats simply your input for default locale.
 
 ```xml
 
@@ -38,7 +39,7 @@ These lines formats simply your input for default locale.
             tools:ignore="MissingConstraints"/>
 
 ```
-You can choose any locale.
+* You can choose any locale.
 
 ```kotlin
 
