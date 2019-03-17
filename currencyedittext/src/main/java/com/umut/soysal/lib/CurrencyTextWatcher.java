@@ -38,6 +38,7 @@ class CurrencyTextWatcher implements TextWatcher
                 }
                 else if (keyCode == 55)
                 {
+                    clickDelete = false;
                     okcommo = true;
                     clickDot = true;
                     cursorPosition = editText.getText().length() - 2;
@@ -45,10 +46,13 @@ class CurrencyTextWatcher implements TextWatcher
                 }
                 else if (keyCode == 56)
                 {
+                    clickDelete = false;
                     okcommo = true;
                     clickDot = true;
                     cursorPosition = editText.getText().length() - 2;
                     changeSignedKeyboard();
+                }else{
+                    clickDelete = false;
                 }
                 return false;
             }
@@ -85,7 +89,7 @@ class CurrencyTextWatcher implements TextWatcher
                 rightPost = false;
             }
 
-            if(editText.getSelectionStart()-1>=0) {
+            if(!clickDelete&&editText.getSelectionStart()-1>=0) {
                 String word = newText.substring(editText.getSelectionStart()-1,editText.getSelectionStart());
                 if(word.contentEquals(".") || word.contentEquals(",")){
                     okcommo = true;
@@ -163,7 +167,11 @@ class CurrencyTextWatcher implements TextWatcher
                     int diff = Math.abs(currentTextsize - lastGoodInput.length());
                     if (clickDelete&&!rightPost) {
                         if (diff == 2) {
-                            editText.setSelection(cursorPosition - 1);
+                            if(cursorPosition == 0){
+                                editText.setSelection(0);
+                            }else {
+                                editText.setSelection(cursorPosition - 1);
+                            }
                         } else if (diff > 2) {
                             editText.setSelection(0);
                         } else {
@@ -189,6 +197,7 @@ class CurrencyTextWatcher implements TextWatcher
                     }
                 }
             }
+
         }
         else
         {
@@ -211,7 +220,6 @@ class CurrencyTextWatcher implements TextWatcher
                 isEmpty = false;
             }
         }
-
     }
 
 
@@ -224,7 +232,6 @@ class CurrencyTextWatcher implements TextWatcher
         }
         if (start != 0)
         {
-            // deletecursorPosition=indexOfLastDigit(s.toString().substring(start,start+1));
             currentTextsize = s.toString().length();
             cursorPosition = start;
             if(editText.getText().length()-3>=cursorPosition&&editText.getText().length()-3>0){
@@ -234,7 +241,7 @@ class CurrencyTextWatcher implements TextWatcher
             }
         }else if(start==0&&!ignoreIteration){
             currentTextsize = s.toString().length();
-            cursorPosition = editText.getSelectionStart();
+            cursorPosition = start;
             if(editText.getText().length()-3>=cursorPosition&&editText.getText().length()-3>0){
                 okcommo=false;
             }else{
@@ -248,7 +255,7 @@ class CurrencyTextWatcher implements TextWatcher
     @Override
     public void onTextChanged(final CharSequence s, int start, int before, int count)
     { }
-    
+
     private void changeDecimalKeyboard()
     {
         editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
