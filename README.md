@@ -2,7 +2,7 @@
 CurrencyEditText is an extension of Android's EditText view object. It is a module designed to provide ease-of-use when using an EditText field for gathering currency information from a user.
 
 # Overview
-<img src="image/appSs.gif" width="300" height="490"/>
+<img src="gif/appSs.gif" width="300" height="490"/>
 
 # Setup
 
