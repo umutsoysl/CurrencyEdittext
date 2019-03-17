@@ -10,13 +10,18 @@ Yakında sizlerleyiz....
 Add it as a dependency to your `build.gradle`
 
 ```gradle
-maven { url 'https://jitpack.io' }
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
 
 ```gradle
 dependencies {
-  implementation 'com.github.umutsoysl:CurrencyEdittext:1.0.1'
-}
+	        implementation 'com.github.umutsoysl:CurrencyEdittext:1.0.1'
+	}
 ```
 
 License
