@@ -1,5 +1,5 @@
 # CurrencyEdittext
-CurrencyEditText is an library of Android's EditText view object. It is a module designed to provide ease-of-use when using an EditText field for gathering currency information from a user.
+Android edittext currency mask library
 
 # Overview
 
@@ -44,14 +44,9 @@ dependencies {
             tools:ignore="MissingConstraints"/>
 
 ```
-You're done! The CurrencyEditText module handles all the string manipulation and input monitoring required to allow for a clean, easy-to-use currency entry system.
 
 
 * **You can choose any locale.**
-
-CurrencyEditText relies on a Locale object to properly format the given value. There are two Locale variables that are exposed via getters and setters on a given CurrencyEditText object: locale and defaultLocale.
-
-Locale is the users default locale setting based upon their Android configuration settings. This value is editable by the user in Android settings, as well as via the CurrencyEditText API. 
 
 ```kotlin
 /*
