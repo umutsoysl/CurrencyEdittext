@@ -1,10 +1,11 @@
 # CurrencyEdittext
 Android edittext currency mask library
 
-# Overview
+By inserting additional properties into the  [BlacKCaT27](https://github.com/BlacKCaT27/CurrencyEditText) library, the cursor remains fixed, and the cursor will no longer return to the beginning. The cursor will continue to stay where it is until you change it.
 
-As a user enters additional values, they will appear starting with the right-most digit, pushing older digit entries left as they type.
-The cursor changes to decimal when the user presses the decimal button
+The cursor will move to the decimal point no matter where you are.
+
+# Gif
 
 <img src="gif/appSs.gif" width="300" height="490"/>
 
@@ -31,9 +32,9 @@ dependencies {
 }
 	
 ```
-# Using The Module
+# Using
 
-* **Using the module is not much different from using any other EditText view. Simply define the view in your XML layout:**
+* **You can use the library by adding to the XML side of your project.**
 
 ```xml
 
@@ -55,8 +56,6 @@ set currency usd
 currencyEn.locale = Locale.US
 	
 ```
-
-
 License
 --------
 
