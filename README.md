@@ -3,7 +3,7 @@ Android edittext currency mask library
 
 By inserting additional properties into the  [BlacKCaT27](https://github.com/BlacKCaT27/CurrencyEditText) library, the cursor remains fixed, and the cursor will no longer return to the beginning. The cursor will continue to stay where it is until you change it.
 
-The cursor will move to the decimal point no matter where you are.
+The cursor will move to decimal part when you click to comma.
 
 # Gif
 
